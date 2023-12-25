@@ -1,0 +1,81 @@
+/* property.css */
+
+/* 전체 페이지에 대한 스타일링 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* 부동산 가격 검색기 헤더 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+h2{
+    text-align: center;
+}
+#output{
+    text-align: center;
+}
+
+/* 입력 요소와 버튼을 감싸는 컨테이너 */
+.address-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 주소 입력 필드 */
+#sample5_address {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* 주소 검색 버튼 */
+input[type="button"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+/* 지도 요소 */
+#map {
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.data-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-field {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}

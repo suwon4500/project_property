@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>우리동네 부동산</title>
+    <link rel="stylesheet" href="property.css">
+</head>
+<body>
+
+
+<p><h1>부동산 가격 검색기</h1></p>
+<p><h2>입력한 주소와 같은 구의 최근 50건의 부동산 거래 정보를 표기합니다.</h2></p>
+<p style="text-align: center">매물의 위치를 보고싶으시면 도로명주소를 복사해서 검색해주세요</p>
+
+<div class="address-container">
+    <input type="text" id="sample5_address" placeholder="주소검색 버튼을 눌러주세요">
+    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색">
+    <input type="button" id="button" value="거래내역 검색"><br>
+</div>
+
+<div id="map" style="width:800px;height:400px;margin-top:10px;display:none"></div>
+
+<div id="output" class="data-container"></div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!--주소검색api-->
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d81d4c54c5f1ba8c1de6d047e50167b&libraries=services"></script><!--네이버지도api-->
+<script src="property_js.js"></script>
+</body>
+</html>

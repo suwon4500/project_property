@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>temp.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #174ad4;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #8c8c8c; font-style: italic;}
+.s5 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+temp.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s1">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">html </span><span class="s1">lang</span><span class="s3">=&quot;en&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">head</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">meta </span><span class="s1">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">title</span><span class="s0">&gt;Title&lt;/</span><span class="s2">title</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">link </span><span class="s1">rel</span><span class="s3">=&quot;stylesheet&quot; </span><span class="s1">href</span><span class="s3">=&quot;property.css&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">head</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">body</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">p</span><span class="s0">&gt;&lt;</span><span class="s2">h1</span><span class="s0">&gt;부동산 가격 검색기&lt;/</span><span class="s2">h1</span><span class="s0">&gt;&lt;/</span><span class="s2">p</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">p</span><span class="s0">&gt;&lt;</span><span class="s2">h2</span><span class="s0">&gt;주소를 입력하세요&lt;/</span><span class="s2">h2</span><span class="s0">&gt;&lt;/</span><span class="s2">p</span><span class="s0">&gt;</span>
+
+
+<span class="s0">&lt;</span><span class="s2">div </span><span class="s1">id</span><span class="s3">=&quot;output&quot; </span><span class="s1">class</span><span class="s3">=&quot;data-container&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">div</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;</span><span class="s2">script</span><span class="s0">&gt;</span>
+    <span class="s2">var </span><span class="s0">xhr = </span><span class="s2">new </span><span class="s0">XMLHttpRequest();</span>
+    <span class="s2">var </span><span class="s0">url = </span><span class="s3">'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev'</span><span class="s0">; </span><span class="s4">/*URL*/</span>
+    <span class="s2">var </span><span class="s0">queryParams = </span><span class="s3">'?' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'serviceKey'</span><span class="s0">) + </span><span class="s3">'='</span><span class="s0">+</span><span class="s3">'4w04mUILpusZy2JG1hkWqsK8RhcP2WD40PJhwO2mFWpe6RGSzqF7PE%2F6VNkLakhVz3tl5%2FES8KVjyDA%2B6N0Isg%3D%3D'</span><span class="s0">; </span><span class="s4">/*Service Key*/</span>
+    <span class="s0">queryParams += </span><span class="s3">'&amp;' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'pageNo'</span><span class="s0">) + </span><span class="s3">'=' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'1'</span><span class="s0">); </span><span class="s4">/**/</span>
+    <span class="s0">queryParams += </span><span class="s3">'&amp;' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'numOfRows'</span><span class="s0">) + </span><span class="s3">'=' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'20'</span><span class="s0">); </span><span class="s4">/**/</span>
+    <span class="s0">queryParams += </span><span class="s3">'&amp;' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'LAWD_CD'</span><span class="s0">) + </span><span class="s3">'=' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'26320'</span><span class="s0">); </span><span class="s4">/**/</span>
+    <span class="s0">queryParams += </span><span class="s3">'&amp;' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'DEAL_YMD'</span><span class="s0">) + </span><span class="s3">'=' </span><span class="s0">+ encodeURIComponent(</span><span class="s3">'201512'</span><span class="s0">); </span><span class="s4">/**/</span>
+    <span class="s0">xhr.open(</span><span class="s3">'GET'</span><span class="s0">, url + queryParams);</span>
+    <span class="s0">xhr.onreadystatechange = </span><span class="s2">function </span><span class="s0">() {</span>
+        <span class="s2">if </span><span class="s0">(</span><span class="s2">this</span><span class="s0">.readyState == </span><span class="s5">4 </span><span class="s0">&amp;&amp; </span><span class="s2">this</span><span class="s0">.status == </span><span class="s5">200</span><span class="s0">) {</span>
+            <span class="s2">var </span><span class="s0">xmlDoc = </span><span class="s2">this</span><span class="s0">.responseXML;</span>
+            <span class="s2">var </span><span class="s0">items = xmlDoc.getElementsByTagName(</span><span class="s3">'item'</span><span class="s0">);</span>
+
+            <span class="s2">var </span><span class="s0">outputDiv = document.getElementById(</span><span class="s3">'output'</span><span class="s0">);</span>
+            <span class="s2">var </span><span class="s0">content = </span><span class="s3">''</span><span class="s0">;</span>
+
+            <span class="s2">for </span><span class="s0">(</span><span class="s2">var </span><span class="s0">i = </span><span class="s5">0</span><span class="s0">; i &lt; items.length; i++) {</span>
+                <span class="s2">var </span><span class="s0">item = items[i];</span>
+                <span class="s2">var </span><span class="s0">거래금액 = item.querySelector(</span><span class="s3">'거래금액'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">건축년도 = item.querySelector(</span><span class="s3">'건축년도'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">아파트 = item.querySelector(</span><span class="s3">'아파트'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">도로명 = item.querySelector(</span><span class="s3">'도로명'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">월 = item.querySelector(</span><span class="s3">'월'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">일 = item.querySelector(</span><span class="s3">'일'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">전용면적 = item.querySelector(</span><span class="s3">'전용면적'</span><span class="s0">).textContent;</span>
+                <span class="s2">var </span><span class="s0">층 = item.querySelector(</span><span class="s3">'층'</span><span class="s0">).textContent;</span>
+
+
+                <span class="s2">var </span><span class="s0">outputString = </span><span class="s3">`</span>
+                <span class="s3">&lt;div class=&quot;data-item&quot;&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;아파트: </span><span class="s0">${아파트}</span><span class="s3">&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;거래금액: </span><span class="s0">${거래금액}</span><span class="s3">만원&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;건축년도: </span><span class="s0">${건축년도}</span><span class="s3">년&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;도로명주소: </span><span class="s0">${도로명}</span><span class="s3">&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;날짜: </span><span class="s0">${월}</span><span class="s3">월 </span><span class="s0">${일}</span><span class="s3">일&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;전용면적: </span><span class="s0">${전용면적}</span><span class="s3">제곱미터&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;층: </span><span class="s0">${층}</span><span class="s3">층&lt;/span&gt; 
+                &lt;/div&gt;`</span><span class="s0">;</span>
+
+                <span class="s0">outputDiv.insertAdjacentHTML(</span><span class="s3">'beforeend'</span><span class="s0">, outputString);</span>
+            <span class="s0">}</span>
+        <span class="s0">}</span>
+    <span class="s0">};</span>
+    <span class="s0">xhr.send(</span><span class="s3">''</span><span class="s0">);</span>
+
+
+
+<span class="s0">&lt;/</span><span class="s2">script</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;/</span><span class="s2">body</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">html</span><span class="s0">&gt;</span></pre>
+</body>
+</html>

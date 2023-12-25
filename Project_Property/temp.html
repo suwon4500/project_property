@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="property.css">
+</head>
+<body>
+<p><h1>부동산 가격 검색기</h1></p>
+<p><h2>주소를 입력하세요</h2></p>
+
+
+<div id="output" class="data-container"></div>
+
+<script>
+    var xhr = new XMLHttpRequest();
+    var url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev'; /*URL*/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'4w04mUILpusZy2JG1hkWqsK8RhcP2WD40PJhwO2mFWpe6RGSzqF7PE%2F6VNkLakhVz3tl5%2FES8KVjyDA%2B6N0Isg%3D%3D'; /*Service Key*/
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('20'); /**/
+    queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('26320'); /**/
+    queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512'); /**/
+    xhr.open('GET', url + queryParams);
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var xmlDoc = this.responseXML;
+            var items = xmlDoc.getElementsByTagName('item');
+
+            var outputDiv = document.getElementById('output');
+            var content = '';
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var 거래금액 = item.querySelector('거래금액').textContent;
+                var 건축년도 = item.querySelector('건축년도').textContent;
+                var 아파트 = item.querySelector('아파트').textContent;
+                var 도로명 = item.querySelector('도로명').textContent;
+                var 월 = item.querySelector('월').textContent;
+                var 일 = item.querySelector('일').textContent;
+                var 전용면적 = item.querySelector('전용면적').textContent;
+                var 층 = item.querySelector('층').textContent;
+
+
+                var outputString = `
+                <div class="data-item">
+                    <span class="data-field">아파트: ${아파트}</span>
+                    <span class="data-field">거래금액: ${거래금액}만원</span>
+                    <span class="data-field">건축년도: ${건축년도}년</span>
+                    <span class="data-field">도로명주소: ${도로명}</span>
+                    <span class="data-field">날짜: ${월}월 ${일}일</span>
+                    <span class="data-field">전용면적: ${전용면적}제곱미터</span>
+                    <span class="data-field">층: ${층}층</span>
+                </div>`;
+
+                outputDiv.insertAdjacentHTML('beforeend', outputString);
+            }
+        }
+    };
+    xhr.send('');
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>property.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #174ad4;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+.s5 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+property.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s1">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">html </span><span class="s1">lang</span><span class="s3">=&quot;ko&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">head</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">meta </span><span class="s1">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">title</span><span class="s0">&gt;우리동네 부동산&lt;/</span><span class="s2">title</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">link </span><span class="s1">rel</span><span class="s3">=&quot;stylesheet&quot; </span><span class="s1">href</span><span class="s3">=&quot;property.css&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">head</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">body</span><span class="s0">&gt;</span>
+
+
+<span class="s0">&lt;</span><span class="s2">p</span><span class="s0">&gt;&lt;</span><span class="s2">h1</span><span class="s0">&gt;부동산 가격 검색기&lt;/</span><span class="s2">h1</span><span class="s0">&gt;&lt;/</span><span class="s2">p</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">p</span><span class="s0">&gt;&lt;</span><span class="s2">h2</span><span class="s0">&gt;입력한 주소와 같은 구의 최근 50건의 부동산 거래 정보를 표기합니다.&lt;/</span><span class="s2">h2</span><span class="s0">&gt;&lt;/</span><span class="s2">p</span><span class="s0">&gt;</span>
+<span class="s0">&lt;</span><span class="s2">p </span><span class="s1">style</span><span class="s3">=&quot;</span><span class="s1">text-align</span><span class="s0">: </span><span class="s3">center&quot;</span><span class="s0">&gt;매물의 위치를 보고싶으시면 도로명주소를 복사해서 검색해주세요&lt;/</span><span class="s2">p</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;</span><span class="s2">div </span><span class="s1">class</span><span class="s3">=&quot;address-container&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">input </span><span class="s1">type</span><span class="s3">=&quot;text&quot; </span><span class="s1">id</span><span class="s3">=&quot;sample5_address&quot; </span><span class="s1">placeholder</span><span class="s3">=&quot;주소검색 버튼을 눌러주세요&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">input </span><span class="s1">type</span><span class="s3">=&quot;button&quot; </span><span class="s1">onclick</span><span class="s3">=&quot;</span><span class="s0">sample5_execDaumPostcode()</span><span class="s3">&quot; </span><span class="s1">value</span><span class="s3">=&quot;주소 검색&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;</span><span class="s2">input </span><span class="s1">type</span><span class="s3">=&quot;button&quot; </span><span class="s1">id</span><span class="s3">=&quot;button&quot; </span><span class="s1">value</span><span class="s3">=&quot;거래내역 검색&quot;</span><span class="s0">&gt;&lt;</span><span class="s2">br</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">div</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;</span><span class="s2">div </span><span class="s1">id</span><span class="s3">=&quot;map&quot; </span><span class="s1">style</span><span class="s3">=&quot;</span><span class="s1">width</span><span class="s0">:</span><span class="s4">800</span><span class="s3">px</span><span class="s0">;</span><span class="s1">height</span><span class="s0">:</span><span class="s4">400</span><span class="s3">px</span><span class="s0">;</span><span class="s1">margin-top</span><span class="s0">:</span><span class="s4">10</span><span class="s3">px</span><span class="s0">;</span><span class="s1">display</span><span class="s0">:</span><span class="s3">none&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">div</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;</span><span class="s2">div </span><span class="s1">id</span><span class="s3">=&quot;output&quot; </span><span class="s1">class</span><span class="s3">=&quot;data-container&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">div</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;</span><span class="s2">script </span><span class="s1">src</span><span class="s3">=&quot;//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">script</span><span class="s0">&gt;</span><span class="s5">&lt;!--주소검색api--&gt;</span>
+<span class="s0">&lt;</span><span class="s2">script </span><span class="s1">src</span><span class="s3">=&quot;//dapi.kakao.com/v2/maps/sdk.js?appkey=7d81d4c54c5f1ba8c1de6d047e50167b&amp;libraries=services&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">script</span><span class="s0">&gt;</span><span class="s5">&lt;!--네이버지도api--&gt;</span>
+<span class="s0">&lt;</span><span class="s2">script </span><span class="s1">src</span><span class="s3">=&quot;property_js.js&quot;</span><span class="s0">&gt;&lt;/</span><span class="s2">script</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">body</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/</span><span class="s2">html</span><span class="s0">&gt;</span></pre>
+</body>
+</html>

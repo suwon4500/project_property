@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>property_js.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+property_js.js</font>
+</center></td></tr></table>
+<pre><span class="s0">var </span><span class="s1">mapContainer = document.getElementById(</span><span class="s2">'map'</span><span class="s1">), </span><span class="s3">// 지도를 표시할 div</span>
+    <span class="s1">mapOption = {</span>
+        <span class="s1">center: </span><span class="s0">new </span><span class="s1">daum.maps.LatLng(</span><span class="s4">37.537187</span><span class="s1">, </span><span class="s4">127.005476</span><span class="s1">), </span><span class="s3">// 지도의 중심좌표</span>
+        <span class="s1">level: </span><span class="s4">4 </span><span class="s3">// 지도의 확대 레벨</span>
+    <span class="s1">};</span>
+
+<span class="s3">//지도를 미리 생성</span>
+<span class="s0">var </span><span class="s1">map = </span><span class="s0">new </span><span class="s1">daum.maps.Map(mapContainer, mapOption);</span>
+<span class="s3">//주소-좌표 변환 객체를 생성</span>
+<span class="s0">var </span><span class="s1">geocoder = </span><span class="s0">new </span><span class="s1">daum.maps.services.Geocoder();</span>
+<span class="s3">//마커를 미리 생성</span>
+<span class="s0">var </span><span class="s1">marker = </span><span class="s0">new </span><span class="s1">daum.maps.Marker({</span>
+    <span class="s1">position: </span><span class="s0">new </span><span class="s1">daum.maps.LatLng(</span><span class="s4">37.537187</span><span class="s1">, </span><span class="s4">127.005476</span><span class="s1">),</span>
+    <span class="s1">map: map</span>
+<span class="s1">});</span>
+
+<span class="s0">var </span><span class="s1">gucode=</span><span class="s2">'26530'</span><span class="s1">;</span><span class="s3">//법정구코드</span>
+<span class="s0">function </span><span class="s1">sample5_execDaumPostcode() {</span>
+    <span class="s0">new </span><span class="s1">daum.Postcode({</span>
+        <span class="s1">oncomplete: </span><span class="s0">function</span><span class="s1">(data) {</span>
+            <span class="s0">var </span><span class="s1">addr = data.address; </span><span class="s3">// 최종 주소 변수</span>
+            <span class="s1">gucode = data.sigunguCode;</span>
+            <span class="s3">// 주소 정보를 해당 필드에 넣는다.</span>
+            <span class="s1">document.getElementById(</span><span class="s2">&quot;sample5_address&quot;</span><span class="s1">).value = addr;</span>
+            <span class="s3">// 주소로 상세 정보를 검색</span>
+            <span class="s1">geocoder.addressSearch(data.address, </span><span class="s0">function</span><span class="s1">(results, status) {</span>
+                <span class="s3">// 정상적으로 검색이 완료됐으면</span>
+                <span class="s0">if </span><span class="s1">(status === daum.maps.services.Status.OK) {</span>
+                    <span class="s0">var </span><span class="s1">result = results[</span><span class="s4">0</span><span class="s1">]; </span><span class="s3">//첫번째 결과의 값을 활용</span>
+                    <span class="s3">// 해당 주소에 대한 좌표를 받아서</span>
+                    <span class="s0">var </span><span class="s1">coords = </span><span class="s0">new </span><span class="s1">daum.maps.LatLng(result.y, result.x);</span>
+                    <span class="s3">// 지도를 보여준다.</span>
+                    <span class="s1">mapContainer.style.display = </span><span class="s2">&quot;block&quot;</span><span class="s1">;</span>
+                    <span class="s1">map.relayout();</span>
+                    <span class="s3">// 지도 중심을 변경한다.</span>
+                    <span class="s1">map.setCenter(coords);</span>
+                    <span class="s3">// 마커를 결과값으로 받은 위치로 옮긴다.</span>
+                    <span class="s1">marker.setPosition(coords)</span>
+                <span class="s1">}</span>
+            <span class="s1">});</span>
+        <span class="s1">}</span>
+    <span class="s1">}).open();</span>
+<span class="s1">}</span>
+
+
+<span class="s0">var </span><span class="s1">currentDate = </span><span class="s0">new </span><span class="s1">Date();</span><span class="s3">//date생성</span>
+<span class="s0">var </span><span class="s1">year = currentDate.getFullYear();</span>
+<span class="s0">var </span><span class="s1">month = currentDate.getMonth() + </span><span class="s4">1</span><span class="s1">;</span>
+<span class="s0">var </span><span class="s1">ym= year.toString()+month.toString();</span><span class="s3">//api요청에 사용하기 위해 string으로 재조합</span>
+
+<span class="s1">document.getElementById(</span><span class="s2">'button'</span><span class="s1">).addEventListener(</span><span class="s2">'click'</span><span class="s1">, </span><span class="s0">function </span><span class="s1">(){</span>
+    <span class="s0">var </span><span class="s1">xhr = </span><span class="s0">new </span><span class="s1">XMLHttpRequest();</span><span class="s3">//버튼을 클릭하면 api를 매번 새로운 정보를 이용해 호출하게 되어있음</span>
+    <span class="s0">var </span><span class="s1">url = </span><span class="s2">'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev'</span><span class="s1">; </span><span class="s3">/*URL*/</span>
+    <span class="s0">var </span><span class="s1">queryParams = </span><span class="s2">'?' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'serviceKey'</span><span class="s1">) + </span><span class="s2">'='</span><span class="s1">+</span><span class="s2">'4w04mUILpusZy2JG1hkWqsK8RhcP2WD40PJhwO2mFWpe6RGSzqF7PE%2F6VNkLakhVz3tl5%2FES8KVjyDA%2B6N0Isg%3D%3D'</span><span class="s1">; </span><span class="s3">/*Service Key*/</span>
+    <span class="s1">queryParams += </span><span class="s2">'&amp;' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'pageNo'</span><span class="s1">) + </span><span class="s2">'=' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'1'</span><span class="s1">); </span><span class="s3">/**/</span>
+    <span class="s1">queryParams += </span><span class="s2">'&amp;' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'numOfRows'</span><span class="s1">) + </span><span class="s2">'=' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'50'</span><span class="s1">); </span><span class="s3">/**/</span>
+    <span class="s1">queryParams += </span><span class="s2">'&amp;' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'LAWD_CD'</span><span class="s1">) + </span><span class="s2">'=' </span><span class="s1">+ encodeURIComponent(gucode); </span><span class="s3">//시군구 코드</span>
+    <span class="s1">queryParams += </span><span class="s2">'&amp;' </span><span class="s1">+ encodeURIComponent(</span><span class="s2">'DEAL_YMD'</span><span class="s1">) + </span><span class="s2">'=' </span><span class="s1">+ encodeURIComponent(ym); </span><span class="s3">//오늘 날짜</span>
+    <span class="s1">xhr.open(</span><span class="s2">'GET'</span><span class="s1">, url + queryParams);</span>
+    <span class="s0">var </span><span class="s1">outputDiv = document.getElementById(</span><span class="s2">'output'</span><span class="s1">);</span>
+    <span class="s1">outputDiv.innerHTML=</span><span class="s2">''</span><span class="s1">;</span>
+    <span class="s1">xhr.onreadystatechange = </span><span class="s0">function </span><span class="s1">() {</span>
+        <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.readyState == </span><span class="s4">4 </span><span class="s1">&amp;&amp; </span><span class="s0">this</span><span class="s1">.status == </span><span class="s4">200</span><span class="s1">) {</span>
+            <span class="s0">var </span><span class="s1">xmlDoc = </span><span class="s0">this</span><span class="s1">.responseXML;</span>
+            <span class="s0">var </span><span class="s1">items = xmlDoc.getElementsByTagName(</span><span class="s2">'item'</span><span class="s1">);</span>
+
+            <span class="s0">var </span><span class="s1">outputDiv = document.getElementById(</span><span class="s2">'output'</span><span class="s1">);</span>
+            <span class="s0">var </span><span class="s1">sum=</span><span class="s4">0</span><span class="s1">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">var </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; items.length; i++) {</span>
+                <span class="s3">//api로 리턴받은 xml데이터중 필요한 데이터만 뽑아옴.</span>
+                <span class="s0">var </span><span class="s1">item = items[i];</span>
+                <span class="s0">var </span><span class="s1">거래금액 = item.querySelector(</span><span class="s2">'거래금액'</span><span class="s1">).textContent;</span>
+                <span class="s1">sum+=parseInt(거래금액.replace(</span><span class="s2">','</span><span class="s1">,</span><span class="s2">''</span><span class="s1">));</span><span class="s3">//평균거래금액을 구하기위함.</span>
+                <span class="s0">var </span><span class="s1">건축년도 = item.querySelector(</span><span class="s2">'건축년도'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">아파트 = item.querySelector(</span><span class="s2">'아파트'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">도로명 = item.querySelector(</span><span class="s2">'도로명'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">년 = item.querySelector(</span><span class="s2">'년'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">월 = item.querySelector(</span><span class="s2">'월'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">일 = item.querySelector(</span><span class="s2">'일'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">전용면적 = item.querySelector(</span><span class="s2">'전용면적'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">층 = item.querySelector(</span><span class="s2">'층'</span><span class="s1">).textContent;</span>
+                <span class="s0">var </span><span class="s1">건물번호 = parseInt(item.querySelector(</span><span class="s2">'도로명건물본번호코드'</span><span class="s1">).textContent).toString();</span>
+
+                <span class="s3">//뽑아온 데이터를 박스 형태로 출력</span>
+                <span class="s0">var </span><span class="s1">outputString = </span><span class="s2">`</span>
+                <span class="s2">&lt;div class=&quot;data-item&quot;&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${아파트}</span><span class="s2">&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${도로명}${건물번호}</span><span class="s2">&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${거래금액}</span><span class="s2">만원&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;건축년도: </span><span class="s1">${건축년도}</span><span class="s2">년&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${년}</span><span class="s2">년 </span><span class="s1">${월}</span><span class="s2">월 </span><span class="s1">${일}</span><span class="s2">일&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${전용면적}</span><span class="s2">제곱미터&lt;/span&gt; 
+                    &lt;span class=&quot;data-field&quot;&gt;</span><span class="s1">${층}</span><span class="s2">층&lt;/span&gt; 
+                &lt;/div&gt;`</span><span class="s1">;</span>
+                <span class="s1">outputDiv.insertAdjacentHTML(</span><span class="s2">'beforeend'</span><span class="s1">, outputString);</span>
+            <span class="s1">}</span>
+            <span class="s0">var </span><span class="s1">avg=sum/items.length;</span>
+            <span class="s1">alert(</span><span class="s2">&quot;검색하신 동네의 평균 거래금액은 &quot;</span><span class="s1">+avg+</span><span class="s2">&quot;만원 입니다.&quot;</span><span class="s1">);</span>
+            <span class="s3">//평균금액 표기</span>
+        <span class="s1">}</span>
+    <span class="s1">};</span>
+    <span class="s1">xhr.send(</span><span class="s2">''</span><span class="s1">);</span>
+<span class="s1">})</span></pre>
+</body>
+</html>
